@@ -244,7 +244,7 @@ app_license = "mit"
 
 fixtures = [
     {
-        "doctype": "Client Script",
+        "doctype": "Server Script",
         "filters": [
             ["module", "=", "quantbit_kenya"],
         ],
