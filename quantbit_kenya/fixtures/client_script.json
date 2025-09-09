@@ -1,1 +1,57 @@
-[]
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2025-09-09 14:06:46.983729",
+  "module": "quantbit_kenya",
+  "name": "Set Address From Customer Branch",
+  "script": "frappe.ui.form.on(\"Sales Invoice\", {\r\n    custom_branch: function(frm) {\r\n        if (frm.doc.custom_branch) {\r\n            frappe.db.get_value(\"Customer Branch\", frm.doc.custom_branch, \"delivery_address\")\r\n                .then(r => {\r\n                    if (r && r.message && r.message.delivery_address) {\r\n                        frm.set_value(\"shipping_address\", r.message.delivery_address);\r\n                        frm.set_value(\"custom_customer_address_new\", r.message.delivery_address);\r\n                        \r\n                    }\r\n                });\r\n        } else {\r\n            frm.set_value(\"shipping_address\", \"\");\r\n        }\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2025-09-09 10:41:44.205993",
+  "module": "quantbit_kenya",
+  "name": "Branch Filter",
+  "script": "frappe.ui.form.on('Sales Invoice', {\r\n    customer: function(frm) {\r\n        frm.set_query('custom_branch', function() {\r\n            return {\r\n                filters: {\r\n                    customer_name: frm.doc.customer\r\n                }\r\n            };\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Customer Branch",
+  "enabled": 1,
+  "modified": "2025-09-09 13:07:34.062232",
+  "module": "quantbit_kenya",
+  "name": "Set Billing Address of Customer",
+  "script": "frappe.ui.form.on('Customer Branch', {\r\n    customer_name: function(frm) {\r\n        if (frm.doc.customer_name) {\r\n            frappe.call({\r\n                method: \"frappe.contacts.doctype.address.address.get_default_address\",\r\n                args: {\r\n                    doctype: \"Customer\",\r\n                    name: frm.doc.customer_name\r\n                },\r\n                callback: function(r) {\r\n                    if (r.message) {\r\n                        frappe.call({\r\n                            method: \"frappe.contacts.doctype.address.address.get_address_display\",\r\n                            args: {\r\n                                address_dict: r.message\r\n                            },\r\n                            callback: function(res) {\r\n                                if (res.message) {\r\n                                    // Convert <br> tags to newlines\r\n                                    let clean_address = res.message.replace(/<br\\s*\\/?>/gi, \"\\n\");\r\n                                    frm.set_value(\"billing_address\", clean_address.trim());\r\n                                }\r\n                            }\r\n                        });\r\n                    } else {\r\n                        frm.set_value(\"billing_address\", \"\");\r\n                    }\r\n                }\r\n            });\r\n        }\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2025-09-09 13:49:39.479812",
+  "module": "quantbit_kenya",
+  "name": "Set Filter for branch",
+  "script": "frappe.ui.form.on('Sales Order', {\r\n    customer: function(frm) {\r\n        frm.set_query('custom_branch', function() {\r\n            return {\r\n                filters: {\r\n                    customer_name: frm.doc.customer\r\n                }\r\n            };\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2025-09-09 14:04:11.525585",
+  "module": "quantbit_kenya",
+  "name": "Set Address From Branch To SI",
+  "script": "frappe.ui.form.on(\"Sales Order\", {\r\n    custom_branch: function(frm) {\r\n        if (frm.doc.custom_branch) {\r\n            frappe.db.get_value(\"Customer Branch\", frm.doc.custom_branch, \"delivery_address\")\r\n                .then(r => {\r\n                    if (r && r.message && r.message.delivery_address) {\r\n                        frm.set_value(\"shipping_address\", r.message.delivery_address);\r\n                        frm.set_value(\"custom_customer_address_new\", r.message.delivery_address);\r\n                    }\r\n                });\r\n        } else {\r\n            frm.set_value(\"shipping_address\", \"\");\r\n        }\r\n    }\r\n});",
+  "view": "Form"
+ }
+]

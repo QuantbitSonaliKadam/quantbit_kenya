@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:branch_id",
+ "creation": "2025-09-09 09:57:49.724231",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "branch_id",
+  "branch_name",
+  "billing_address",
+  "delivery_address",
+  "column_break_icco",
+  "customer_id",
+  "customer_name",
+  "billing_currency",
+  "contact_name",
+  "mobile_no",
+  "email_id",
+  "tax_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "branch_id",
+   "fieldtype": "Data",
+   "label": "Branch ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "billing_address",
+   "fieldtype": "Long Text",
+   "label": "Billing Address"
+  },
+  {
+   "fieldname": "delivery_address",
+   "fieldtype": "Long Text",
+   "label": "Delivery Address"
+  },
+  {
+   "fieldname": "column_break_icco",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_id",
+   "fieldtype": "Link",
+   "label": "Group ID",
+   "options": "Customer Group"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Link",
+   "label": "Parent Customer Name",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "billing_currency",
+   "fieldtype": "Data",
+   "label": "Billing Currency"
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "label": "Contact Name"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Phone",
+   "label": "Mobile No"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email ID"
+  },
+  {
+   "fieldname": "tax_id",
+   "fieldtype": "Data",
+   "label": "Tax ID"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-09-09 14:39:45.262079",
+ "modified_by": "Administrator",
+ "module": "quantbit_kenya",
+ "name": "Customer Branch",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "branch_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

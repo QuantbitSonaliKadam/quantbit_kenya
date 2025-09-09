@@ -248,5 +248,12 @@ fixtures = [
         "filters": [
             ["module", "=", "quantbit_kenya"],
         ],
-    }
+    },
+    {
+        "doctype": "Client Script",
+        "filters": [
+            ["module", "=", "quantbit_kenya"],
+        ],
+    },
+
 ]
